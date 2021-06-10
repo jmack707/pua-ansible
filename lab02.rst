@@ -82,10 +82,10 @@ The SSH Security Configuration defines the ciphers, exchange methods, HMACs, and
 #. Configure the General Properties
 
    #. Name: **pua.radius.ssh.conf**
-   #. Ciphers: aes256-ctr, aes192-ctr
-   #. Key Exchange Methods: diffie-hellman-group1-sha14, diffie-hellman-group-exchange-sha1
-   #. HMACs: hmac-sha1
-   #. Compression Algorithms: none
+   #. Ciphers: **aes256-ctr, aes192-ctr**
+   #. Key Exchange Methods: **diffie-hellman-group1-sha14**, **diffie-hellman-group-exchange-sha1**
+   #. HMACs: **hmac-sha1**
+   #. Compression Algorithms: **none**
    #. Click **Save**
 
    |image4|
@@ -118,7 +118,7 @@ Task 5 - Create WebSSH Resource
 
 #. Configure the General Properties
 
-   #. Name: **Radius01**
+   #. Name: **Client01**
    #. Destination: 
       #. select: **IP Address** radio button
       #. Enter IP: **10.1.20.9**
@@ -142,14 +142,14 @@ The LDAP Authentication configuration defines the external LDAP server used to i
    
 #. Configure General Properties
 
-   #. Name: pua.ra.conf
-   #. Proxy User DN: **CN=admin,CN=Users,DC=f5lab,DC=local**
+   #. Name: **ldap.conf**
+   #. Proxy User DN: **cn=Admin,cn=Users,dc=f5lab,dc=local**
    #. Proxy User Password: **admin**
 
 #. User settings 
 
-   #. Bypass User List: **CN=admin,CN=Users,DC=f5lab,DC=local**, and Click Add
-   #. Click **Finished**
+   #. Bypass User List: **cn=Admin,cn=Users,dc=f5lab,dc=local**, and Click **Add**
+   #. Click **Save**
 
    |image10|
 
@@ -164,9 +164,9 @@ The Webtop houses links to resources we would like to access.
 
    |image13|
 
-#. General Propertiesp
+#. General Properties
 
-   #. Name: **pua.Webtop**
+   #. Name: **pua.webtop**
    #. Type: **Full**
    #. Click **Finish**
 
@@ -181,7 +181,7 @@ Task 8 - Create an Access Profile
 
 #. Configure General Properties
 
-   #. Name: **pua.ldap.psp**
+   #. Name: **pua.radius.psp**
    #. Profile Type: **All**
 
    |image16|
@@ -242,7 +242,7 @@ Task 9 - Create an Admin Access Macro
    |image26|
 
 #. Click **WebSSH**
-#. Click **/Common/BIGIP5**
+#. Click **/Common/Client01**
 
    |image27|
 
@@ -290,6 +290,7 @@ Task 10 - Create an GET UPN from CAC Macro
    .. code-block:: console
 
       Custom Variable = session.custom.ephemeral.upn
+
       Custom Expression = 
       set x509e_fields [split [mcget {session.ssl.cert.x509extension}] "\n"]; 
       # For each element in the list: 
@@ -356,7 +357,7 @@ Task 10 - Create an GET UPN from CAC Macro
 
    |image45|
 
-#. Name: **NO_UPN**
+#. Name: **NO UPN**
 #. Tile: **NO UPN**
 #. Click **Save**
 
@@ -390,12 +391,12 @@ Task 11 - Create the LDAP Macro
 
    |image51|
 
-#. Name: LDAP_Query
+#. Name: LDAP Query
 #. Click **Save**
 
    |image52|
 
-#. Expand the LDAP_Query Macro
+#. Expand the LDAP Query Macro
 #. Click **+ (plus symbol)** 
 
    |image53|
@@ -407,7 +408,7 @@ Task 11 - Create the LDAP Macro
    |image54|
 
 #. Update the Properties tab
-   #. Server = **/Common/pua.ldap-servers** 
+   #. Server = **/Common/pua-ldap-servers** 
    #. SearchDN = **DC=f5lab**, **DC=local**
    #. SearchFilter = **UserPrincipalName=%{session.custom.ephemeral.upn}**
    #. Fetch groups to which the user or group belong = **Direct**
@@ -532,7 +533,7 @@ Task 12 - Create the CAC AUTH Macro
 
    |image78|
 
-#. Click **+* (plus symbol)* on the Found Branch between GET UPN from CAC and Out
+#. Click **+* (plus symbol)** on the Found Branch between GET UPN from CAC and Out
 
    |image79|
 
@@ -598,6 +599,7 @@ Task 13 - Update the Initial Access Policy
 #. Click **Add Item**
 
    |image92|
+
 
 #. Click **+ (plus symbol)** between CAC Auth and Deny Terminals on the successful branch
 
@@ -721,46 +723,44 @@ Task 16 - Add the **pua.webtop.ssl** profile to **pua.webtop.ssl** virtual Serve
 
 
 Navigate to Local Traffic >> Virtual Servers
-#. Select the **PUA** partitiion
-#. Click **Virtual Servers**
+#. Select the **webtop** partitiion
+#. Click **pua.webtop** link
 
    |image113|
 
-#. Click the **pua.acme.com** link
-
-   |image114|
 
 #. Under Configuration, move **pua.webtop.ssl** SSL Profile to Selected
 
    |image115|
 
 #. Access Policy 
-   #. Set Access Profile to **pua.ldap.psp**
+   #. Set Access Profile to **pua.radius.psp**
    #. Set Connectivity Profile to **pua.cp**
 
 #. Ephemeral Authentication
-   #. Set Access Configuration to **pua.radius.access.conf**
-   #. Set LDAP Authentication Configuration to **pua.ldap.conf**
+   #. Set Access Configuration to **radius.access.conf**
    #. Click **Update**
 
    |image116|
 
 
 #. Navigate to Local Traffic >> Virtual Servers
-#. Click **ldap.f5lab.local**
+#. Select the **radius** partitiion
+#. Click **pua-radius**
 
    |image117|
 
 #. Ephemeral Authentication
-   #. Set Access Configuration to **pua.radius.access.conf**
+   #. Set Access Configuration to **pua.access.conf**
    #. Set LDAP Authentication Configuration to **pua.ldap.conf**
    #. Click **Update**
 
+   |image117.5|
 
 Task 17 - PUA testing 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Open a browser to **https://pua.acme.com**
+#. Open a browser to **https://webtop.acme.com**
 #. Click **Continue**
 
    |image118|
@@ -771,7 +771,7 @@ Task 17 - PUA testing
 
    |image119|
 
-#. Click **Radius01** tab
+#. Click **Client01** tab
 
    |image120|
 
