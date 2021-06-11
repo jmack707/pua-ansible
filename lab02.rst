@@ -721,7 +721,7 @@ Navigate to Local Traffic >> Virtual Servers
    |image113|
 
 
-#. Under Configuration, move **pua.webtop.ssl** SSL Profile to Selected
+#. Under Configuration, ensure **pua-clientssl** SSL Profile to Selected
 
    |image115|
 
@@ -730,8 +730,8 @@ Navigate to Local Traffic >> Virtual Servers
    #. Set Connectivity Profile to **pua.cp**
 
 #. Ephemeral Authentication
-   #. Set Access Configuration to **radius.access.conf**
-   #. Click **Update**
+   *. Set Access Configuration to **radius.access.conf**
+   *. Click **Update**
 
    |image116|
 
@@ -743,9 +743,9 @@ Navigate to Local Traffic >> Virtual Servers
    |image117|
 
 #. Ephemeral Authentication
-   #. Set Access Configuration to **pua.access.conf**
-   #. Set LDAP Authentication Configuration to **pua.ldap.conf**
-   #. Click **Update**
+   *. Set Access Configuration to **pua.access.conf**
+   *. Set LDAP Authentication Configuration to **pua.ldap.conf**
+   *. Click **Update**
 
    |image117.5|
 
@@ -933,6 +933,10 @@ Task 17 - PUA testing
 .. |image116| image:: media/lab02/image116.png
 .. |image117| image:: media/lab02/image117.png
 .. |image117.5| image:: media/lab02/image117.5.png
+.. |image118| image:: media/lab02/image118.png
+.. |image119| image:: media/lab02/image119.png
+.. |image120| image:: media/lab02/image120.png
+.. |image121| image:: media/lab02/image121.png
 .. |image200| image:: media/lab02/200.png
 .. |image201| image:: media/lab02/201.png
 .. |image202| image:: media/lab02/202.png
