@@ -120,40 +120,32 @@ Task 5 - Create WebSSH Resource
 
    #. Name: **Client01**
    #. Destination: 
-      #. select: **IP Address** radio button
-      #. Enter IP: **10.1.20.9**
+   #. select: **IP Address** radio button
+   #. Enter IP: **10.1.20.8**
    #. Authentication configuration: **pua.radius.ssh.conf**
 
 #. Configure the Customization Setting for English
 
-   #. Caption: **Radius01**
+   #. Caption: **Client01**
    #. Click **Save**
 
    |image8|
 
-Task 6 - Creating an LDAP Authentication configuration
+Task 6 - Creating an RADIUS Authentication configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The LDAP Authentication configuration defines the external LDAP server used to identity users.
+The RADIUS Authentication configuration defines the external LDAP server used to identity users.
 
-#. Navigate to Access >> Ephemeral Authentication >> LDAP Authentication. Click the **+ (plus symbol)**
+#. Navigate to Access >> Ephemeral Authentication >> RADIUS Authentication >> Profile. Click the **+ (plus symbol)**
 
    |image9|
    
 #. Configure General Properties
 
-   #. Name: **ldap.conf**
-   #. Proxy User DN: **cn=Admin,cn=Users,dc=f5lab,dc=local**
-   #. Proxy User Password: **admin**
-
-#. User settings 
-
-   #. Bypass User List: **cn=Admin,cn=Users,dc=f5lab,dc=local**, and Click **Add**
-   #. Click **Save**
+   #. Name: **radius.conf**
+   #. shared Secret: **secret**
 
    |image10|
-
-
 
 Task 7 - Create a Webtop
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -206,7 +198,7 @@ Task 9 - Create an Admin Access Macro
    |image19|
 
 
-   #. Enter **Admin Access** for the Name
+#. Enter **Admin Access** for the Name
 #. Click **Save**
 
    |image20|
@@ -391,7 +383,7 @@ Task 11 - Create the LDAP Macro
 
    |image51|
 
-#. Name: LDAP Query
+#. Name: **LDAP Query**
 #. Click **Save**
 
    |image52|
@@ -408,11 +400,11 @@ Task 11 - Create the LDAP Macro
    |image54|
 
 #. Update the Properties tab
-   #. Server = **/Common/pua-ldap-servers** 
-   #. SearchDN = **DC=f5lab**, **DC=local**
-   #. SearchFilter = **UserPrincipalName=%{session.custom.ephemeral.upn}**
-   #. Fetch groups to which the user or group belong = **Direct**
-   #. Click **Branch Rules**
+   *. Server = **/Common/pua-ldap-servers** 
+   *. SearchDN = **DC=f5lab**, **DC=local**
+   *. SearchFilter = **UserPrincipalName=%{session.custom.ephemeral.upn}**
+   *. Fetch groups to which the user or group belong = **Direct**
+   *. Click **Branch Rules**
    
    |image55|
 
@@ -533,7 +525,7 @@ Task 12 - Create the CAC AUTH Macro
 
    |image78|
 
-#. Click **+* (plus symbol)** on the Found Branch between GET UPN from CAC and Out
+#. Click **+* (plus symbol)** on the Found Branch between GET UPN from CAC and CAC Failure
 
    |image79|
 
@@ -561,7 +553,7 @@ Task 12 - Create the CAC AUTH Macro
 
    |image84|
 
-#. Change the Success 1st, 2nd, and 4th terminal to **Failure**, and click **Save**
+#. Change the 1st, 2nd, and 4th Success terminals to **Failure**, and click **Save**
 
    |image85|
 
@@ -652,7 +644,7 @@ Task 13 - Update the Initial Access Policy
 
    |image101|
 
-#. Click **+* (plus symbol)* between the Variable Assign and deny Terminals
+#. Click **+* (plus symbol)** between the Variable Assign and deny Terminals
 
    |image102|
 
@@ -682,32 +674,32 @@ Task 13 - Update the Initial Access Policy
 Task 14 - Create an SSL Profile
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Navigate to Local Traffic >> Profiles >> SSL >> Client >> **+ (plus symbol)**
+#. Navigate to Local Traffic >> Profiles >> SSL >> Client
+#. Select the **webtop** partition
 
    |image107|
 
-#. Name: **pua.webtop.ssl**
-#. Click **Custom** box beside Certificate Key Chain
-#. Click **Add** 
+
+#. Click **pua-client** hyperlink
 
    |image108|
 
-#. Set Certificate to **acme.com-wildcard**
-#. Set Key to **acme.com-wildcard**
+V
+#. Verify Certificate is set to **acme.com-wildcard**
+#. Verify Key is set to **acme.com-wildcard**
 
    |image109|
 
-#. Click the **Custom** box beside Trusted Certificate Authorities
-#. Set Trusted Certficate Authorities to **ca.f5lab.local**
-#. Click the **Custom** box beside Advertised Certificate Authorities
-#. Set Advertised Certificate Authorities to **ca.f5lab.local**
-#. Click **Finish**
+
+#. Verify Trusted Certficate Authorities is set to **ca.f5lab.local**
+#. Verify Advertised Certificate Authorities is set to **ca.f5lab.local**
+#. Click **update**
 
    |image110|
 
 
 Task 15 - Create a Connectivity Profile
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Navigate to Access >> Profiles / Policies >> Connectivity / VPN >> Connectivity >> Profile **+ (plus symbol)**
 
    |image111|
@@ -874,6 +866,7 @@ Task 17 - PUA testing
 .. |image71| image:: media/lab02/image071.png
 .. |image72| image:: media/lab02/image072.png
 .. |image73| image:: media/lab02/image073.png
+.. |image74| image:: media/lab02/image074.png
 .. |image75| image:: media/lab02/image075.png
 .. |image75| image:: media/lab02/image075.png
 .. |image76| image:: media/lab02/image076.png
@@ -936,6 +929,10 @@ Task 17 - PUA testing
 .. |image111| image:: media/lab02/image111.png
 .. |image112| image:: media/lab02/image112.png
 .. |image113| image:: media/lab02/image113.png
+.. |image115| image:: media/lab02/image115.png
+.. |image116| image:: media/lab02/image116.png
+.. |image117| image:: media/lab02/image117.png
+.. |image117.5| image:: media/lab02/image117.5.png
 .. |image200| image:: media/lab02/200.png
 .. |image201| image:: media/lab02/201.png
 .. |image202| image:: media/lab02/202.png
