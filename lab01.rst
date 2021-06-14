@@ -739,9 +739,9 @@ Navigate to Local Traffic >> Virtual Servers
    *. Set Connectivity Profile to **pua.cp**
 
 #. Ephemeral Authentication
-   *. Set Access Configuration to **pua.access.conf**
-   *. Set LDAP Authentication Configuration to **pua.ldap.conf**
-   *. Click **Update**
+   * Set Access Configuration to **pua.access.conf**
+   * Set LDAP Authentication Configuration to **pua.ldap.conf**
+   * Click **Update**
 
    |image116|
 
@@ -753,9 +753,9 @@ Navigate to Local Traffic >> Virtual Servers
    |image117|
 
 #. Ephemeral Authentication
-   *. Set Access Configuration to **pua.access.conf**
-   *. Set LDAP Authentication Configuration to **pua.ldap.conf**
-   *. Click **Update**
+   * Set Access Configuration to **pua.access.conf**
+   * Set LDAP Authentication Configuration to **pua.ldap.conf**
+   * Click **Update**
 
 
 Task 17 - PUA testing 
@@ -772,7 +772,7 @@ Task 17 - PUA testing
 
    |image119|
 
-#. Click **Radius01** tab
+#. Click **Client01** tab
 
    |image120|
 
