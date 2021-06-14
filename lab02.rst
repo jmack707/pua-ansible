@@ -684,7 +684,6 @@ Task 14 - Create an SSL Profile
 
    |image108|
 
-V
 #. Verify Certificate is set to **acme.com-wildcard**
 #. Verify Key is set to **acme.com-wildcard**
 
